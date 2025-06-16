@@ -7,14 +7,9 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
-  /* Reset básico */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-
   body {
     font-family: Arial, sans-serif;
-    background-color: #ffe6f0; /* rosa clarinho inicial */
+    background-color: #ffe6f0;
     color: #222;
     min-height: 100vh;
     padding: 1rem;
@@ -39,11 +34,6 @@
     margin-bottom: 1rem;
     user-select: none;
     flex-wrap: wrap;
-  }
-
-  #datetime, #clima {
-    display: flex;
-    align-items: center;
   }
 
   #clima img {
@@ -78,109 +68,7 @@
   #contador {
     font-weight: bold;
     text-align: center;
-    margin-bottom: 1rem;
   }
-
-  /* Área de comentários */
-  #comentarios {
-    max-width: 700px;
-    margin: 0 auto 3rem auto;
-  }
-
-  #comentarios h3 {
-    font-family: 'Dancing Script', cursive;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-
-  #formComentario {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  #formComentario textarea {
-    resize: vertical;
-    min-height: 60px;
-    border-radius: 10px;
-    border: 1px solid #f3c9dc;
-    padding: 0.6rem;
-    font-size: 1rem;
-  }
-
-  #formComentario button {
-    background: #b33a6c;
-    color: white;
-    border: none;
-    padding: 0.8rem;
-    font-size: 1.1rem;
-    border-radius: 15px;
-    cursor: pointer;
-    user-select: none;
-  }
-  #formComentario button:hover {
-    background: #e754a1;
-  }
-
-  #listaComentarios {
-    margin-top: 1rem;
-    max-height: 250px;
-    overflow-y: auto;
-    border: 1px solid #f3c9dc;
-    border-radius: 10px;
-    padding: 0.7rem;
-    background: #fff0f6;
-  }
-
-  .comentarioItem {
-    background: white;
-    padding: 0.6rem;
-    border-radius: 10px;
-    margin-bottom: 0.5rem;
-    box-shadow: 0 1px 4px rgba(179,58,108,0.15);
-    font-size: 0.95rem;
-    line-height: 1.3;
-    position: relative;
-  }
-  .respostaItem {
-    background: #fce4ec;
-    margin-left: 1rem;
-    font-style: italic;
-    font-size: 0.9rem;
-    color: #880e4f;
-  }
-
-  /* Animações estrelas e corações */
-  .estrela, .coracao {
-    position: fixed;
-    pointer-events: none;
-    animation-timing-function: ease-out;
-    user-select: none;
-  }
-
-  .estrela {
-    color: #ffd700;
-    font-size: 18px;
-    animation-name: flutuar;
-    animation-duration: 4s;
-  }
-
-  .coracao {
-    color: #f06292;
-    font-size: 22px;
-    animation-name: subir;
-    animation-duration: 3.5s;
-  }
-
-  @keyframes flutuar {
-    0% {transform: translateY(0) scale(1); opacity: 1;}
-    100% {transform: translateY(-100px) scale(0.3); opacity: 0;}
-  }
-  @keyframes subir {
-    0% {transform: translateY(0) scale(1); opacity: 1;}
-    100% {transform: translateY(-130px) scale(0.4); opacity: 0;}
-  }
-
 </style>
 </head>
 <body>
@@ -197,55 +85,28 @@
   <div id="contador">Próximo texto em: --:--:--</div>
 </div>
 
-<div id="comentarios">
-  <h3>Deixe seu recadinho 💌</h3>
-  <form id="formComentario">
-    <textarea id="novoComentario" placeholder="Escreva algo fofo, engraçado ou um emoji..."></textarea>
-    <button type="submit">Enviar</button>
-  </form>
-  <div id="listaComentarios"></div>
-</div>
-
-<audio id="audioPlayer" loop volume="0.05" autoplay>
-  <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_3f8fcd8e3c.mp3?filename=relaxing-acoustic-guitar-ambient-10881.mp3" type="audio/mpeg">
-  Seu navegador não suporta áudio.
-</audio>
-
 <script>
-  // Fontes, frases e cores para fundo
   const frases = [
-    const frases = [
-  "Gabriela, você é o motivo do meu sorriso bobo no meio da rotina chata.",
-  "Pensei em você agora, e quase derrubei o café de tanto que sorri sozinho.",
-  "Se pensar em você fosse esporte, eu já teria medalha de ouro.",
-  "Sua risada é meu som favorito, mesmo que só na minha cabeça agora.",
-  "Tem dias que o melhor plano é só lembrar do seu jeito de ser e seguir.",
-  "Quando a vida aperta, é você que vem dar aquela paz meio doida.",
-  "Nem precisava, mas você faz meu dia mais interessante só de existir.",
-  "Se eu pudesse, mandava um abraço quentinho agora pra você – tá valendo o pensamento mesmo.",
-  "Você é tipo aquela música que fica grudada e faz o dia valer a pena.",
-  "Pensar em você é meu passatempo preferido, e olha que tem muita coisa pra fazer."
-];
-  
-  // Cores para o fundo, menos verde escuro
-  const coresFundo = ['#ffe6f0', '#fff0f6', '#fff5f8', '#fce4ec', '#f8bbd0', '#f48fb1', '#f06292', '#ec407a', '#e91e63', '#d81b60', '#c2185b', '#ad1457', '#880e4f'];
-  
-  // Função que detecta se a cor é escura pra mudar a cor da letra
+    "Gabriela, você é o motivo do meu sorriso bobo no meio da rotina chata.",
+    "Pensei em você agora, e quase derrubei o café de tanto que sorri sozinho.",
+    "Se pensar em você fosse esporte, eu já teria medalha de ouro.",
+  ];
+
+  const coresFundo = ['#ffe6f0', '#fff0f6', '#fff5f8', '#fce4ec', '#f8bbd0'];
+
   function corEhEscura(hex) {
-    // Retira #
     hex = hex.replace('#', '');
     const r = parseInt(hex.substring(0,2),16);
     const g = parseInt(hex.substring(2,4),16);
     const b = parseInt(hex.substring(4,6),16);
-    // Luminosidade relativa padrão
     const luminancia = 0.299*r + 0.587*g + 0.114*b;
     return luminancia < 140;
   }
 
-  // Atualiza fundo e cor do texto
   function atualizarFundoTexto() {
     let cor = coresFundo[Math.floor(Math.random()*coresFundo.length)];
     document.body.style.backgroundColor = cor;
+    const painel = document.getElementById('painelFrases');
     if(corEhEscura(cor)) {
       document.body.style.color = '#eee';
       painel.style.color = '#eee';
@@ -255,32 +116,25 @@
     }
   }
 
-  // Saudação cursiva conforme horário
   function saudacao() {
     const header = document.getElementById('saudacao');
     const now = new Date();
     const h = now.getHours();
-    let texto;
-    if(h>=5 && h<12) texto = 'Bom dia, Gabriela!';
-    else if(h>=12 && h<18) texto = 'Boa tarde, Gabriela!';
-    else texto = 'Boa noite, Gabriela!';
-    header.textContent = texto;
+    if(h >= 5 && h < 12) header.textContent = 'Bom dia, Gabriela!';
+    else if(h >= 12 && h < 18) header.textContent = 'Boa tarde, Gabriela!';
+    else header.textContent = 'Boa noite, Gabriela!';
   }
 
-  // Data e hora
   function dataHora() {
     const dt = document.getElementById('datetime');
     const now = new Date();
     dt.textContent = now.toLocaleString('pt-BR', { dateStyle:'full', timeStyle:'medium' });
   }
 
-  // Pega clima pela API do OpenWeatherMap (Brasil/Sao Paulo como padrão)
   async function pegarClima() {
     const climaDiv = document.getElementById('clima');
     try {
-      // Pra exemplo sem chave, pegando pela localização ip pode não funcionar, então colocarei SP fixo
-      // Pode trocar para cidade desejada ou implementar geolocalização depois
-      const apiKey = 'fa2a00e1098f18e06f7733d74616272c'; // chave gratuita, teste, pode trocar
+      const apiKey = 'fa2a00e1098f18e06f7733d74616272c';
       const url = `https://api.openweathermap.org/data/2.5/weather?q=São Paulo,BR&units=metric&lang=pt_br&appid=${apiKey}`;
       const res = await fetch(url);
       const data = await res.json();
@@ -294,40 +148,35 @@
     }
   }
 
-  // Mostrar frases 3x por dia: manhã(8h), tarde(15h), noite(21h)
-  const horarios = [8,15,21];
+  const horarios = [8, 15, 21];
+
   function proximoHorario() {
     const now = new Date();
     for(let h of horarios) {
       if(now.getHours() < h) return h;
     }
-    return horarios[0] + 24; // amanhã cedo
+    return horarios[0] + 24;
   }
 
-  // Mostrar frase atual conforme horário e contagem regressiva
   function atualizarFraseEContador() {
     const now = new Date();
-    const painel = document.getElementById('painelFrases');
     const textoFofo = document.getElementById('textoFofo');
     const contador = document.getElementById('contador');
 
     let idx = horarios.findIndex(h => now.getHours() < h);
     if(idx === -1) idx = 0;
 
-    // Exibir frase
     textoFofo.textContent = frases[idx];
 
-    // Atualizar fundo e cor texto
     atualizarFundoTexto();
 
-    // Contagem regressiva pro próximo horário
     const proxHora = proximoHorario();
     let proxData = new Date(now);
     if(proxHora >= 24) {
-      proxData.setDate(now.getDate() +1);
-      proxData.setHours(horarios[0],0,0,0);
+      proxData.setDate(now.getDate() + 1);
+      proxData.setHours(horarios[0], 0, 0, 0);
     } else {
-      proxData.setHours(proxHora,0,0,0);
+      proxData.setHours(proxHora, 0, 0, 0);
     }
 
     let dif = proxData - now;
@@ -342,72 +191,6 @@
     contador.textContent = `Próximo texto em: ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
   }
 
-  // Animações de estrelas e corações na abertura
-  function criarEstrela() {
-    const estrela = document.createElement('div');
-    estrela.classList.add('estrela');
-    estrela.textContent = '⭐';
-    estrela.style.left = Math.random() * window.innerWidth + 'px';
-    estrela.style.top = window.innerHeight + 'px';
-    estrela.style.animationDuration = (3 + Math.random()*3) + 's';
-    document.body.appendChild(estrela);
-    setTimeout(() => estrela.remove(), 3500);
-  }
-  function criarCoracao() {
-    const coracao = document.createElement('div');
-    coracao.classList.add('coracao');
-    coracao.textContent = '💖';
-    coracao.style.left = Math.random() * window.innerWidth + 'px';
-    coracao.style.top = window.innerHeight + 'px';
-    coracao.style.animationDuration = (2 + Math.random()*2) + 's';
-    document.body.appendChild(coracao);
-    setTimeout(() => coracao.remove(), 3200);
-  }
-  function iniciarAnimacoes() {
-    for(let i=0; i<15; i++) {
-      setTimeout(criarEstrela, i*200);
-      setTimeout(criarCoracao, i*350);
-    }
-  }
-
-  // Comentários (localStorage simples)
-  const formComentario = document.getElementById('formComentario');
-  const listaComentarios = document.getElementById('listaComentarios');
-
-  function salvarComentario(texto) {
-    const comentarios = JSON.parse(localStorage.getItem('comentariosGabriela')||'[]');
-    comentarios.push({texto, data: new Date().toISOString()});
-    localStorage.setItem('comentariosGabriela', JSON.stringify(comentarios));
-  }
-
-  function carregarComentarios() {
-    listaComentarios.innerHTML = '';
-    const comentarios = JSON.parse(localStorage.getItem('comentariosGabriela')||'[]');
-    comentarios.forEach(c => {
-      const div = document.createElement('div');
-      div.classList.add('comentarioItem');
-      div.textContent = c.texto;
-      listaComentarios.appendChild(div);
-    });
-  }
-
-  formComentario.addEventListener('submit', e => {
-    e.preventDefault();
-    const texto = formComentario.novoComentario.value.trim();
-    if(!texto) return alert('Escreva algo fofo pra enviar 💖');
-    salvarComentario(texto);
-    carregarComentarios();
-    formComentario.reset();
-  });
-
-  // Música: autoplay e baixinha
-  const audio = document.getElementById('audioPlayer');
-  audio.volume = 0.05;
-  audio.play().catch(()=>{ /* bloqueio autoplay do browser */ });
-
-  // Inicializações
-  const painel = document.getElementById('painelFrases');
-
   function atualizarTudo() {
     saudacao();
     dataHora();
@@ -417,10 +200,6 @@
 
   atualizarTudo();
   setInterval(atualizarTudo, 1000);
-
-  iniciarAnimacoes();
-  carregarComentarios();
-
 </script>
 
 </body>
