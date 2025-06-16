@@ -1,19 +1,232 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Céu Estrelado da PP ✨</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Para Gabriela 💖</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffe6f0; /* rosa clarinho */
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    transition: background-color 1s ease;
+  }
+
+  header {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 0.2rem;
+    color: #b33a6c;
+    user-select: none;
+  }
+
+  #datetime {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #444;
+  }
+
+  nav {
+    margin-bottom: 1rem;
+  }
+
+  nav button {
+    background: #b33a6c;
+    color: white;
+    border: none;
+    margin: 0 0.3rem;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+  nav button:hover {
+    background: #e754a1;
+  }
+
+  section {
+    display: none;
+    background: white;
+    color: black;
+    max-width: 600px;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 0 8px rgba(179,58,108,0.3);
+    border: 1px solid #f3c9dc; /* linha fina e fofa */
+    margin-bottom: 1.5rem;
+  }
+
+  section.active {
+    display: block;
+  }
+
+  /* Frases e pensamentos */
+  .frase {
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+  .pensamento {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 0.7rem;
+  }
+
+  /* Botão cobrança */
+  #btnCobrar {
+    background: #f06292;
+    border: none;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 3px 6px rgba(240,98,146,0.5);
+    transition: background-color 0.3s ease;
+  }
+  #btnCobrar:hover {
+    background: #e91e63;
+  }
+
+  #msgCobrança {
+    margin-top: 1rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    color: #b33a6c;
+    user-select: none;
+  }
+</style>
 </head>
 <body>
-  <div class="stars"></div>
-  <div class="container">
-    <h1>✨ Bom dia, boa tarde ou boa noite, pp! ✨</h1>
-    <div id="frase" class="frase-box"></div>
-    <div class="footer">Feito com amor pra você 💖</div>
-  </div>
 
-  <script src="script.js"></script>
+<header id="saudacao">Olá!</header>
+<div id="datetime"></div>
+
+<nav>
+  <button data-section="estrutura">Ver Estrutura Base</button>
+  <button data-section="animacoes">Ver Animações</button>
+  <button data-section="contagem">Ver Contagem e Surpresa</button>
+  <button data-section="clima">Ver Clima</button>
+  <button data-section="mensagens">Ver Mensagens</button>
+  <button data-section="musica">Ver Música</button>
+</nav>
+
+<section id="estrutura">
+  <h2>Estrutura Base</h2>
+  <p class="frase">Gabriela, você é a luz que ilumina até o meu café da manhã mais preguiçoso.</p>
+  <p class="frase">Pensando em você mesmo quando a internet cai — prova que é amor real!</p>
+  <p class="frase">No relógio do meu coração, o horário preferido é sempre o seu.</p>
+  <p class="pensamento">Tá vendo? Tô pensando em você... de novo. E não me canso.</p>
+  <p class="pensamento">Se meu cérebro tivesse um playlist, você estaria no repeat infinito.</p>
+  <p class="pensamento">Gabriela, você é meu “bug” favorito que nunca quero corrigir.</p>
+</section>
+
+<section id="animacoes">
+  <h2>Animações Fofinhas</h2>
+  <p class="frase">Estrelas e coraçõezinhos dançam só pra você enquanto eu penso em te ver.</p>
+  <p class="frase">A lua muda de fase, mas meu amor por você só cresce.</p>
+</section>
+
+<section id="contagem">
+  <h2>Contagem Regressiva + Surpresa</h2>
+  <p class="frase" id="contador"></p>
+  <p class="frase">Dia especial da Gabriela = festa de glitter e amor no site!</p>
+</section>
+
+<section id="clima">
+  <h2>Clima Real e Efeitos</h2>
+  <p class="frase">Se chover aí, deixo umas gotinhas pra você aqui também.</p>
+</section>
+
+<section id="mensagens">
+  <h2>Caixinha de Mensagens</h2>
+  <p class="frase">Aqui você pode me responder com um emoji ou uma palavra doce!</p>
+  <input type="text" id="msgInput" placeholder="Escreva algo fofo pra mim..." style="width: 100%; padding: 0.5rem; margin-top: 0.5rem; border-radius: 10px; border: 1px solid #f3c9dc;">
+  <button id="enviarMsg" style="margin-top:0.5rem; padding:0.5rem 1rem; border:none; background:#b33a6c; color:#fff; border-radius: 10px; cursor:pointer;">Enviar</button>
+  <div id="respostaMsg" style="margin-top:1rem; font-style: italic; color:#b33a6c;"></div>
+</section>
+
+<section id="musica">
+  <h2>Música Romântica</h2>
+  <p class="frase">Aqui toca um som suave só pra embalar nossos pensamentos.</p>
+  <button id="btnSom" style="padding:0.5rem 1rem; border:none; border-radius:10px; background:#b33a6c; color:#fff; cursor:pointer;">Ligar Música</button>
+  <audio id="audioPlayer" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_3f8fcd8e3c.mp3?filename=relaxing-acoustic-guitar-ambient-10881.mp3" type="audio/mpeg">
+  </audio>
+</section>
+
+<button id="btnCobrar" title="Clique para ver uma mensagem especial">Cobrar o amor 💌</button>
+<div id="msgCobrança"></div>
+
+<script>
+  // Saudação dinâmica com fonte cursiva
+  function saudacao() {
+    const header = document.getElementById('saudacao');
+    const now = new Date();
+    const hour = now.getHours();
+    let text = '';
+    if (hour >= 5 && hour < 12) text = 'Bom dia, Gabriela!';
+    else if (hour >= 12 && hour < 18) text = 'Boa tarde, Gabriela!';
+    else text = 'Boa noite, Gabriela!';
+    header.textContent = text;
+  }
+
+  // Data e hora atual
+  function dataHora() {
+    const dt = document.getElementById('datetime');
+    const now = new Date();
+    dt.textContent = now.toLocaleString('pt-BR', { dateStyle: 'full', timeStyle: 'medium' });
+  }
+
+  // Fundo muda de cor aleatória exceto verde escuro
+  const coresFundo = ['#ffe6f0', '#fff0f6', '#fff5f8', '#fce4ec', '#f8bbd0', '#f48fb1', '#f06292', '#ec407a', '#e91e63', '#d81b60', '#c2185b', '#ad1457', '#880e4f'];
+  function corFundoAleatoria() {
+    let cor;
+    do {
+      cor = coresFundo[Math.floor(Math.random() * coresFundo.length)];
+    } while (cor === '#1b5e20'); // verde escuro proibido
+    document.body.style.backgroundColor = cor;
+  }
+
+  // Menu com botões para mostrar seções
+  const botoes = document.querySelectorAll('nav button');
+  const secoes = document.querySelectorAll('section');
+  botoes.forEach(botao => {
+    botao.addEventListener('click', () => {
+      secoes.forEach(sec => sec.classList.remove('active'));
+      const id = botao.getAttribute('data-section');
+      document.getElementById(id).classList.add('active');
+    });
+  });
+
+  // Botão cobrar com mensagem especial
+  const btnCobrar = document.getElementById('btnCobrar');
+  const msgCobrança = document.getElementById('msgCobrança');
+  btnCobrar.addEventListener('click', () => {
+    msgCobrança.textContent = '“Ei, Gabriela... Se eu pudesse cobrar pelo tanto que penso em você, já teria virado milionário! Mas enquanto isso, só peço um sorriso seu de volta. 💌✨”';
+  });
+
+  // Atualizar saudação e data/hora a cada segundo
+  function atualizarTudo() {
+    saudacao();
+    dataHora();
+  }
+  atualizarTudo();
+  setInterval(atualizarTudo, 1000);
+
+  // Inicializar fundo ao carregar
+  corFundoAleatoria();
+</script>
+
 </body>
 </html>
