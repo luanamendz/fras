@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Gabriela 💖</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+  * {
+    transition: background-color 2s ease, color 1s ease;
+  }
 
   body {
     font-family: Arial, sans-serif;
@@ -13,9 +17,7 @@
     color: #222;
     min-height: 100vh;
     padding: 1rem;
-    transition: background-color 1.5s ease;
     overflow-x: hidden;
-    position: relative;
   }
 
   header {
@@ -23,23 +25,6 @@
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 0.2rem;
-    user-select: none;
-  }
-
-  #topoInfo {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    user-select: none;
-    flex-wrap: wrap;
-  }
-
-  #clima img {
-    width: 24px;
-    height: 24px;
-    margin-left: 0.3rem;
   }
 
   #painelFrases {
@@ -50,156 +35,90 @@
     margin: 0 auto 1.5rem auto;
     box-shadow: 0 0 12px rgba(179,58,108,0.2);
     border: 1px solid #f3c9dc;
-    color: black;
-    line-height: 1.4;
-    font-size: 1.2rem;
-    user-select: none;
-    min-height: 100px;
-    position: relative;
-    overflow: hidden;
+    text-align: center;
+    font-size: 1.3rem;
+    line-height: 1.5;
   }
 
-  #textoFofo {
-    font-style: italic;
-    margin-bottom: 1rem;
-    text-align: center;
+  button {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto;
+    font-size: 1rem;
   }
 
-  #contador {
-    font-weight: bold;
-    text-align: center;
+  button:hover {
+    background-color: #c2185b;
   }
 </style>
 </head>
 <body>
 
-<header id="saudacao">Olá, Gabriela!</header>
-
-<div id="topoInfo">
-  <div id="datetime">Carregando data/hora...</div>
-  <div id="clima">🌤️ --°C</div>
-</div>
+<header>Para Gabriela 💖</header>
 
 <div id="painelFrases">
   <div id="textoFofo">Pensando em você, Gabriela... sempre com um sorriso! 😊</div>
-  <div id="contador">Próximo texto em: --:--:--</div>
 </div>
 
+<button onclick="mostrarFrase()">Me surpreenda 💖</button>
+
 <script>
-  const frases = [
-    "Gabriela, você é o motivo do meu sorriso bobo no meio da rotina chata.",
-    "Pensei em você agora, e quase derrubei o café de tanto que sorri sozinho.",
-    "Se pensar em você fosse esporte, eu já teria medalha de ouro.",
+  const sujeitos = ["Você", "Seu sorriso", "Seu olhar", "Seu abraço", "Seu jeitinho", "Seu cheiro", "Seu carinho", "Seu amor", "Sua voz", "Seu toque"];
+  const verbos = ["é", "parece", "tem cheiro de", "tem gosto de", "ilumina", "acende", "transforma", "faz parecer", "me lembra"];
+  const complementos = [
+    "um pedaço do céu",
+    "o motivo da minha felicidade",
+    "a cura pra qualquer tristeza",
+    "um sonho que virou realidade",
+    "poesia em forma de gente",
+    "a melhor parte do meu dia",
+    "meu lugar favorito no mundo",
+    "uma notificação que eu nunca quero ignorar",
+    "uma música boa que não enjoa nunca",
+    "a razão do meu sorriso bobo"
+  ];
+  const extras = [
+    "e eu te amo por isso.",
+    "e fico sorrindo só de lembrar.",
+    "e você nem imagina o quanto me faz bem.",
+    "e eu queria te dizer isso todo dia.",
+    "e você nem sabe o quanto significa pra mim.",
+    "e eu te escolho mil vezes, em mil vidas.",
+    "e, sinceramente, eu sou muito sortudo por ter você.",
+    "e te amo mais do que pizza... e olha que isso é sério.",
+    "e você é minha notificação preferida.",
+    "e não existe wi-fi melhor que sua conexão comigo."
   ];
 
-  const coresFundo = ['#ffe6f0', '#fff0f6', '#fff5f8', '#fce4ec', '#f8bbd0'];
+  const coresFundo = ['#ffe6f0', '#fff0f6', '#fff5f8', '#fce4ec', '#f8bbd0', '#ffdce0', '#ffcfe5', '#ffe0e9', '#ffcdd2', '#f8bbd0'];
 
-  function corEhEscura(hex) {
-    hex = hex.replace('#', '');
-    const r = parseInt(hex.substring(0,2),16);
-    const g = parseInt(hex.substring(2,4),16);
-    const b = parseInt(hex.substring(4,6),16);
-    const luminancia = 0.299*r + 0.587*g + 0.114*b;
-    return luminancia < 140;
+  function gerarFrase() {
+    const sujeito = sujeitos[Math.floor(Math.random() * sujeitos.length)];
+    const verbo = verbos[Math.floor(Math.random() * verbos.length)];
+    const complemento = complementos[Math.floor(Math.random() * complementos.length)];
+    const extra = extras[Math.floor(Math.random() * extras.length)];
+    return `${sujeito} ${verbo} ${complemento}, ${extra}`;
   }
 
-  function atualizarFundoTexto() {
-    let cor = coresFundo[Math.floor(Math.random()*coresFundo.length)];
+  function mudarFundo() {
+    const cor = coresFundo[Math.floor(Math.random() * coresFundo.length)];
     document.body.style.backgroundColor = cor;
-    const painel = document.getElementById('painelFrases');
-    if(corEhEscura(cor)) {
-      document.body.style.color = '#eee';
-      painel.style.color = '#eee';
-    } else {
-      document.body.style.color = '#222';
-      painel.style.color = '#222';
-    }
   }
 
-  function saudacao() {
-    const header = document.getElementById('saudacao');
-    const now = new Date();
-    const h = now.getHours();
-    if(h >= 5 && h < 12) header.textContent = 'Bom dia, Gabriela!';
-    else if(h >= 12 && h < 18) header.textContent = 'Boa tarde, Gabriela!';
-    else header.textContent = 'Boa noite, Gabriela!';
-  }
-
-  function dataHora() {
-    const dt = document.getElementById('datetime');
-    const now = new Date();
-    dt.textContent = now.toLocaleString('pt-BR', { dateStyle:'full', timeStyle:'medium' });
-  }
-
-  async function pegarClima() {
-    const climaDiv = document.getElementById('clima');
-    try {
-      const apiKey = 'fa2a00e1098f18e06f7733d74616272c';
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=São Paulo,BR&units=metric&lang=pt_br&appid=${apiKey}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      const icon = data.weather[0].icon;
-      const temp = Math.round(data.main.temp);
-      const desc = data.weather[0].description;
-      const iconeUrl = `https://openweathermap.org/img/wn/${icon}.png`;
-      climaDiv.innerHTML = `${desc} ${temp}°C <img src="${iconeUrl}" alt="${desc}"/>`;
-    } catch(e) {
-      climaDiv.textContent = 'Clima indisponível 🌤️';
-    }
-  }
-
-  const horarios = [8, 15, 21];
-
-  function proximoHorario() {
-    const now = new Date();
-    for(let h of horarios) {
-      if(now.getHours() < h) return h;
-    }
-    return horarios[0] + 24;
-  }
-
-  function atualizarFraseEContador() {
-    const now = new Date();
+  function mostrarFrase() {
     const textoFofo = document.getElementById('textoFofo');
-    const contador = document.getElementById('contador');
-
-    let idx = horarios.findIndex(h => now.getHours() < h);
-    if(idx === -1) idx = 0;
-
-    textoFofo.textContent = frases[idx];
-
-    atualizarFundoTexto();
-
-    const proxHora = proximoHorario();
-    let proxData = new Date(now);
-    if(proxHora >= 24) {
-      proxData.setDate(now.getDate() + 1);
-      proxData.setHours(horarios[0], 0, 0, 0);
-    } else {
-      proxData.setHours(proxHora, 0, 0, 0);
-    }
-
-    let dif = proxData - now;
-    if(dif < 0) dif = 0;
-
-    let segs = Math.floor(dif / 1000);
-    let h = Math.floor(segs / 3600);
-    segs %= 3600;
-    let m = Math.floor(segs / 60);
-    let s = segs % 60;
-
-    contador.textContent = `Próximo texto em: ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    textoFofo.textContent = gerarFrase();
+    mudarFundo();
   }
 
-  function atualizarTudo() {
-    saudacao();
-    dataHora();
-    pegarClima();
-    atualizarFraseEContador();
-  }
-
-  atualizarTudo();
-  setInterval(atualizarTudo, 1000);
+  // Primeira frase ao abrir
+  mostrarFrase();
 </script>
 
 </body>
